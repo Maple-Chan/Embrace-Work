@@ -72,7 +72,26 @@ public boolean equals(Object anObject) {
 
 `>>>`无符号右移，高位补0
 
+### Lambda表达式
 
+不需要声明参数类型，编译器识别。
+
+param -> { statements; }
+
+```java
+MathOperation addition = (int a, int b) -> a + b;
+
+ interface MathOperation {
+      int operation(int a, int b);
+   }
+```
+
+某个方法的参数是函数式接口，可以用lambda表达式传入参数。
+
+### 函数式接口
+
+1. 有且仅有一个抽象方法，但是可以有多个非抽象方法的接口。
+2. 可以被隐式转化为lambda表达式
 
 ### 集合有哪些
 
