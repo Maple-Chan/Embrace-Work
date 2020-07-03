@@ -344,6 +344,89 @@ Spring2.5为我们引入了组件自动扫描机制，他可以在类路径底�
 
 
 
+### 查看两个Body的源码
+
+
+
+### @Bean
+
+> [@Bean 注解全解析](https://www.cnblogs.com/cxuanBlog/p/11179439.html)
+>
+> [Spring注解之@Bean 用法介绍](https://www.cnblogs.com/east7/p/13199749.html)
+>
+> 
+
+注解 @Bean是一个方法级别的注解，主要**用在@Configuration注解的类**里，也可以用**在@Component注解的类**里，默认添加的bean的id为方法名。
+
+
+
+#### @Bean的依赖
+
+```java
+@Configuration
+public class AppConfig {
+    @Bean
+    public TransferService transferService(AccountRepository accountRepository) {
+        return new TransferServiceImpl(accountRepository);
+    }
+}
+```
+
+#### 自定义Bean别名
+
+```java
+    @Bean("myBeanObj")
+    public BeanTest getBeanObj() {
+        BeanTest bean = new BeanTest();
+        System.out.println("调用方法：" + bean);
+        return bean;
+    }
+```
+
+通过下面的方法可以定义多个别名：
+
+```java
+@Bean(name = { "myBeanObj", "myBeanObj1", "beanObj" })
+```
+
+**实践**
+
+```java
+// =============================
+@RunWith(SpringJUnit4ClassRunner.class)//加载程序上下文
+@ContextConfiguration(
+        classes = TestBean.class
+)//测试类
+public class TestForBean {
+    @Autowired
+    BeanClass beanClass;//自动装载对象
+    @Test
+    public void loadBeanClass(){
+        beanClass.getInfo();//调用Bean中的方法
+    }
+}
+// ==========================
+public class BeanClass {
+    //Bean对象
+    Logger logger = LoggerFactory.getLogger(BeanClass.class);
+    public BeanClass(){
+        logger.info("=====");
+    }
+    public void getInfo(){
+        logger.info("getInfo");
+    }
+}
+//  ========================
+@Service
+public class TestBean {
+    @Bean  // Bean注解，返回Bean对象。
+    public BeanClass getBeanClass(){
+        return new BeanClass();
+    }
+}
+
+```
+
 
 
 ## 文件
@@ -353,4 +436,6 @@ Spring2.5为我们引入了组件自动扫描机制，他可以在类路径底�
 
 
 
+
+### 
 
