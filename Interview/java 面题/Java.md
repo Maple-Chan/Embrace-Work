@@ -95,6 +95,16 @@ String[] splitAddress=address.split("\\^|@|#"); //分隔符为^ @ #
 
 
 
+### System.getProperty(?)
+
++ System.getProperty("line.separator")
+
+  在java中存在一些转义字符,比如"\n"为换行符,但是也有一些JDK自带的一些操作符
+
+  这也是换行符,功能和"\n"是一致的,但是此种写法屏蔽了 Windows和Linux的区别 ，更保险一些.
+
++ 
+
 ### Lambda表达式
 
 不需要声明参数类型，编译器识别。
